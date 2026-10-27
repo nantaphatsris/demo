@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behind the Sound — Demo</title>
+<style>
+:root{--bg:#101116;--panel:#191b23;--panel2:#20232d;--line:#303340;--text:#f4f4f7;--muted:#a7a9b8;--accent:#b8f36b;--accent2:#c7a8ff;--danger:#ff9e9e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#302544 0,transparent 35%),var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--panel2);color:var(--text);transition:.18s}button:hover{border-color:var(--accent);transform:translateY(-1px)}button.primary{background:var(--accent);color:#15170f;border-color:var(--accent);font-weight:750}button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+header{max-width:1100px;margin:auto;padding:28px 22px 12px;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-size:13px;letter-spacing:.18em;color:var(--accent);font-weight:800}.tag{border:1px solid var(--line);padding:6px 10px;border-radius:99px;color:var(--muted);font-size:12px}
+main{max-width:1100px;margin:auto;padding:12px 22px 60px}.hero{padding:30px 0 24px}.eyebrow{color:var(--accent2);text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:800}.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:10px 0 14px;letter-spacing:-.04em}.hero p{max-width:680px;color:var(--muted);margin:0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 24px}.step{border:1px solid var(--line);background:#15161d;border-radius:14px;padding:13px 15px;color:var(--muted);font-size:13px}.step strong{display:block;color:var(--text);font-size:14px;margin-bottom:2px}.step.active{border-color:var(--accent);background:#1b2117}.step.active strong{color:var(--accent)}
+.panel{background:linear-gradient(145deg,rgba(32,35,45,.97),rgba(23,24,32,.97));border:1px solid var(--line);border-radius:20px;padding:clamp(18px,3vw,28px);margin-bottom:18px;box-shadow:0 14px 40px #0002}.panel h2{font-size:23px;margin:0 0 6px}.sub{color:var(--muted);margin:0 0 20px;font-size:14px}.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.between{justify-content:space-between}.sound-card{border:1px solid var(--line);border-radius:16px;padding:16px;background:#14151c;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.sound-card h3{margin:0;font-size:17px}.sound-card p{margin:4px 0 0;color:var(--muted);font-size:13px}.letter{width:40px;height:40px;display:grid;place-items:center;background:#2a2d38;border-radius:12px;font-weight:850;color:var(--accent2);flex-shrink:0}.sound-left{display:flex;align-items:center;gap:12px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.choice{border:1px solid var(--line);background:#14151c;border-radius:16px;padding:16px;min-width:0}.choice.selected{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}.choice h3{margin:0 0 4px}.choice p{font-size:13px;color:var(--muted);min-height:40px;margin:0 0 14px}.pill{font-size:11px;border-radius:99px;background:#2b2b39;color:#d4c6ff;padding:4px 8px;display:inline-block;margin-bottom:10px}
+.quiz-question{padding:18px 0;border-top:1px solid var(--line)}.quiz-question:first-of-type{border-top:0}.quiz-question h3{font-size:16px;margin:0 0 10px}.quiz-options{display:flex;gap:8px;flex-wrap:wrap}.quiz-options button{min-width:68px}.quiz-options button.chosen{border-color:var(--accent);background:#252e1e}.feedback{color:var(--accent);font-size:14px;margin-top:10px}.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.control{background:#14151c;border:1px solid var(--line);border-radius:14px;padding:14px}.control label{display:flex;justify-content:space-between;gap:12px;font-size:14px;margin-bottom:10px}.control output{color:var(--accent);font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:var(--accent)}.target-btn{flex:1;min-width:110px;text-align:left}.target-btn.active{border-color:var(--accent);background:#252e1e}.target-btn small{display:block;color:var(--muted);font-size:12px}.hint{border:1px dashed #6a5a8c;background:#211c2b;border-radius:14px;padding:14px;color:#e1d4ff;margin:16px 0}.hint strong{display:block;margin-bottom:4px}.score{font-size:48px;line-height:1;font-weight:850;color:var(--accent)}.score-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#14151c;border:1px solid var(--line);border-radius:16px;padding:16px}.hidden{display:none!important}.notice{font-size:12px;color:var(--muted);margin-top:18px}.footer{color:var(--muted);font-size:12px;text-align:center;padding:20px}
+@media(max-width:700px){header{padding-top:20px}.steps{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.choice p{min-height:0}.controls{grid-template-columns:1fr}.hero{padding-top:18px}.panel{border-radius:16px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">✳ BEHIND THE SOUND</div><div style="font-size:12px;color:var(--muted)">เบื้องหลังเสียงที่เราได้ยิน</div></div><div class="tag">INTERACTIVE DEMO · v0.1</div></header>
+<main>
+<section class="hero"><div class="eyebrow">Sound design, made tangible</div><h1>เสียงเดิม<br>ความรู้สึกใหม่</h1><p>ทดลองฟัง เรียนรู้ และออกแบบเสียงเคาะประตูด้วยตัวเอง ผ่าน 3 ขั้นตอน ตั้งแต่การสังเกตเสียงไปจนถึงการปรับแต่งให้ตรงกับเป้าหมาย</p></section>
+<div class="steps"><div class="step active" id="step1"><strong>01 / Sound Challenge</strong>ฟังและเลือกเสียง</div><div class="step" id="step2"><strong>02 / Learn & Explore</strong>เรียนรู้และทดลอง</div><div class="step" id="step3"><strong>03 / Design Challenge</strong>สร้างเสียงและรับคะแนน</div></div>
+
+<section class="panel" id="part1">
+<div class="eyebrow">Part 01</div><h2>Sound Challenge</h2><p class="sub">เริ่มจากเสียงเคาะประตู Original แล้วเลือกเวอร์ชันที่เหมาะกับแต่ละสถานการณ์</p>
+<div class="sound-card" style="margin-bottom:18px"><div class="sound-left"><div class="letter">O</div><div><h3>Original · Door Knock</h3><p>เสียงต้นฉบับจำลอง — ยังไม่ผ่านการปรับแต่ง</p></div></div><button onclick="playSound('original', null)">▶ ฟัง Original</button></div>
+<div id="quiz"></div>
+<div class="row between" style="margin-top:16px"><span id="quizStatus" class="sub" style="margin:0">ตอบให้ครบทั้ง 3 ข้อเพื่อไปต่อ</span><button class="primary" id="toPart2" onclick="goPart(2)" disabled>ไป Part 2 →</button></div>
+</section>
+
+<section class="panel hidden" id="part2">
+<div class="eyebrow">Part 02</div><h2>Learn & Explore</h2><p class="sub">เลือกเสียงตัวอย่างเพื่อเรียนรู้ แล้วปรับค่าต่าง ๆ ได้อย่างอิสระ ส่วนนี้ไม่มีคะแนน</p>
+<div class="cards" style="margin-bottom:18px">
+<div class="choice"><span class="pill">TARGET A</span><h3>Horror</h3><p>โทนต่ำ มืด และมีหางเสียงช่วยสร้างบรรยากาศลึกลับ</p><button onclick="loadPreset('horror')">เลือกและฟัง A</button></div>
+<div class="choice"><span class="pill">TARGET B</span><h3>Soft</h3><p>เสียงนุ่ม ลดความแหลมและลดความแรงของเสียง</p><button onclick="loadPreset('soft')">เลือกและฟัง B</button></div>
+<div class="choice"><span class="pill">TARGET C</span><h3>Impact</h3><p>เสียงหนักแน่น เน้นแรงปะทะและความชัดของการเคาะ</p><button onclick="loadPreset('impact')">เลือกและฟัง C</button></div>
+</div>
+<div class="sound-card" style="margin-bottom:16px"><div><h3 id="exploreTitle">กำลังทดลอง: Original</h3><p id="exploreDesc">ปรับค่าด้านล่าง แล้วกดฟังเพื่อเปรียบเทียบ</p></div><button onclick="playCurrent()">▶ ฟังเสียงที่ปรับ</button></div>
+<div class="controls" id="exploreControls"></div>
+<div class="row between" style="margin-top:18px"><button onclick="resetControls()">↺ รีเซ็ตค่า</button><button class="primary" onclick="goPart(3)">ไป Part 3 →</button></div>
+</section>
+
+<section class="panel hidden" id="part3">
+<div class="eyebrow">Part 03</div><h2>Sound Design Challenge</h2><p class="sub">เริ่มจาก Original ที่ยังไม่ปรับ แล้วออกแบบเสียงให้ใกล้เคียงกับ Target ที่เลือก</p>
+<div class="row" style="margin-bottom:18px"><button class="target-btn active" id="tHorror" onclick="chooseTarget('horror')">A · Horror<small>ลึกลับ / โทนต่ำ</small></button><button class="target-btn" id="tSoft" onclick="chooseTarget('soft')">B · Soft<small>นุ่ม / เบา</small></button><button class="target-btn" id="tImpact" onclick="chooseTarget('impact')">C · Impact<small>หนักแน่น / ชัด</small></button></div>
+<div class="row" style="margin-bottom:14px"><button onclick="playSound('original',null)">▶ ฟัง Original</button><button onclick="playSound(target,null)">▶ ฟัง Target</button><button onclick="playCurrent()">▶ ฟังเสียงของฉัน</button></div>
+<div class="hint"><strong>💡 คำใบ้</strong><span id="hintText">ลองลดความสว่างของเสียงด้วย Filter และทดลองช่วงค่าค่อนข้างต่ำ จากนั้นฟังเปรียบเทียบ</span></div>
+<div class="controls" id="challengeControls"></div>
+<div class="row between" style="margin-top:18px"><button onclick="resetControls()">↺ เริ่มปรับใหม่</button><button class="primary" onclick="submitChallenge()">ส่งคำตอบและดูคะแนน</button></div>
+<div id="scoreResult" class="hidden" style="margin-top:18px"><div class="score-wrap"><div><div class="score" id="scoreNumber">0</div><div style="color:var(--muted);font-size:12px">คะแนนจาก 100</div></div><div style="flex:1;min-width:180px"><strong id="scoreTitle">ผลการทดลอง</strong><p id="scoreText" style="color:var(--muted);font-size:13px;margin:4px 0 0"></p></div></div></div>
+<div class="notice">คะแนนเดโม่คำนวณจากความใกล้เคียงของค่า Filter, Pitch และ Reverb เทียบกับค่าที่กำหนดไว้สำหรับ Target ที่เลือก</div>
+</section>
+<div class="footer">BEHIND THE SOUND · Demo prototype · เสียงเคาะประตูในเวอร์ชันนี้เป็นเสียงสังเคราะห์สำหรับทดลองระบบ</div>
+</main>
+<script>
+const presets={
+  horror:{name:'Horror',cutoff:650,pitch:-5,reverb:0.62,gain:0.78,hint:'ลองลดความสว่างของเสียงด้วย Filter และทดลองช่วงค่าค่อนข้างต่ำ จากนั้นเพิ่มหางเสียงเล็กน้อยเพื่อสร้างบรรยากาศ'},
+  soft:{name:'Soft',cutoff:1800,pitch:2,reverb:0.18,gain:0.48,hint:'ลองลดระดับเสียงและใช้ Filter ตัดความแหลมบางส่วน โดยไม่ทำให้เสียงทึบจนเกินไป'},
+  impact:{name:'Impact',cutoff:5200,pitch:-1,reverb:0.08,gain:1.0,hint:'ลองคงความชัดของเสียงไว้ เพิ่มระดับเสียงอย่างระมัดระวัง และใช้หางเสียงสั้น ๆ'}
+};
+let target='horror', currentPreset='original', answers={}, challengeSubmitted=false;
+let ctx=null;
+const state={cutoff:8000,pitch:0,reverb:0.08,gain:0.8};
+const specs=[
+ {key:'cutoff',label:'Filter Cutoff',min:200,max:8000,step:50,unit:'Hz',help:'กำหนดว่าย่านความถี่ใดผ่าน Filter ได้มากน้อยเพียงใด'},
+ {key:'pitch',label:'Pitch',min:-12,max:12,step:1,unit:' semitones',help:'เปลี่ยนระดับเสียงสูง–ต่ำ'},
+ {key:'reverb',label:'Reverb',min:0,max:0.8,step:0.01,unit:'',help:'เพิ่มหางเสียงและความรู้สึกของพื้นที่'},
+ {key:'gain',label:'Volume',min:0.1,max:1.2,step:0.01,unit:'×',help:'ปรับระดับความดัง'}
+];
+function initAudio(){if(!ctx)ctx=new (window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume();return ctx}
+function makeKnockBuffer(){
+ const c=initAudio(), sr=c.sampleRate, dur=1.05, len=Math.floor(sr*dur), b=c.createBuffer(1,len,sr), d=b.getChannelData(0);
+ // Synthesized door knock: a few damped resonant thumps plus a short noisy transient.
+ for(let i=0;i<len;i++){let t=i/sr;let v=0;for(const hit of [0.04,0.18,0.33]){let x=t-hit;if(x>=0){let env=Math.exp(-x*19);v+=env*(0.7*Math.sin(2*Math.PI*115*x)+0.36*Math.sin(2*Math.PI*220*x)+0.18*Math.sin(2*Math.PI*390*x));v+= (Math.random()*2-1)*Math.exp(-x*75)*0.17;}}d[i]=v*0.65;}
+ return b;
+}
+let originalBuffer=null;
+function createImpulse(seconds=2.2,decay=2.5){const c=initAudio(),rate=c.sampleRate,len=Math.floor(rate*seconds),b=c.createBuffer(2,len,rate);for(let ch=0;ch<2;ch++){let d=b.getChannelData(ch);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,decay);}return b}
+let impulse=null;
+function playSound(which, override){
+ const c=initAudio();if(!originalBuffer)originalBuffer=makeKnockBuffer();if(!impulse)impulse=createImpulse();
+ let p;
+ if(which==='original')p={cutoff:8000,pitch:0,reverb:0,gain:0.8};
+ else if(which==='horror'||which==='soft'||which==='impact')p=presets[which];
+ else p=override||state;
+ const src=c.createBufferSource();src.buffer=originalBuffer;src.playbackRate.value=Math.pow(2,(p.pitch||0)/12);
+ const filter=c.createBiquadFilter();filter.type='lowpass';filter.frequency.value=p.cutoff??8000;filter.Q.value=0.7;
+ const dry=c.createGain();dry.gain.value=1-(p.reverb||0)*0.55;
+ const wet=c.createGain();wet.gain.value=(p.reverb||0)*0.85;
+ const conv=c.createConvolver();conv.buffer=impulse;
+ const vol=c.createGain();vol.gain.value=p.gain??0.8;
+ src.connect(filter);filter.connect(dry);dry.connect(vol);filter.connect(conv);conv.connect(wet);wet.connect(vol);vol.connect(c.destination);
+ src.start();
+}
+function playCurrent(){playSound('custom',state)}
+function loadPreset(key){currentPreset=key;Object.assign(state,presets[key]);renderControls('exploreControls');document.getElementById('exploreTitle').textContent='กำลังทดลอง: '+presets[key].name;document.getElementById('exploreDesc').textContent='ค่าตั้งต้นของ Target นี้ — ปรับต่อได้อย่างอิสระ';playSound(key,null)}
+function renderControls(id){const el=document.getElementById(id);el.innerHTML='';specs.forEach(s=>{const d=document.createElement('div');d.className='control';d.innerHTML=`<label for="${id}-${s.key}"><span>${s.label}<br><small style="color:var(--muted)">${s.help}</small></span><output id="${id}-${s.key}-out"></output></label><input type="range" id="${id}-${s.key}" min="${s.min}" max="${s.max}" step="${s.step}" value="${state[s.key]}">`;el.appendChild(d);const input=d.querySelector('input'),out=d.querySelector('output');const update=()=>{state[s.key]=Number(input.value);out.textContent=state[s.key]+s.unit;if(id==='challengeControls')document.getElementById('scoreResult').classList.add('hidden')};input.addEventListener('input',update);update()})}
+function resetControls(){Object.assign(state,{cutoff:8000,pitch:0,reverb:0.08,gain:0.8});renderControls('exploreControls');renderControls('challengeControls');document.getElementById('scoreResult').classList.add('hidden')}
+function buildQuiz(){const qs=[{key:'horror',label:'ข้อ 1 — เสียงแบบ Horror',desc:'เสียงไหนเหมาะกับฉากที่ต้องการความน่ากลัวหรือลึกลับ?'},{key:'soft',label:'ข้อ 2 — เสียงแบบ Soft',desc:'เสียงไหนเหมาะกับความรู้สึกนุ่มนวลและเบาสบาย?'},{key:'impact',label:'ข้อ 3 — เสียงแบบ Impact',desc:'เสียงไหนเหมาะกับจังหวะที่ต้องการแรงปะทะและความหนักแน่น?'}];const q=document.getElementById('quiz');q.innerHTML='';qs.forEach((item,i)=>{const div=document.createElement('div');div.className='quiz-question';div.innerHTML=`<h3>${item.label}</h3><p class="sub" style="margin:0 0 10px">${item.desc}</p><div class="quiz-options">${['A','B','C'].map(k=>`<button data-q="${item.key}" data-a="${k}">ฟัง ${k} ▶</button>`).join('')}<span style="width:8px"></span>${['A','B','C'].map(k=>`<button data-pick="${item.key}" data-a="${k}">${k}</button>`).join('')}</div><div class="feedback" id="feedback-${item.key}"></div>`;q.appendChild(div)});q.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>playSound(b.dataset.a==='A'?'horror':b.dataset.a==='B'?'soft':'impact')));q.querySelectorAll('[data-pick]').forEach(b=>b.addEventListener('click',()=>{answers[b.dataset.pick]=b.dataset.a;b.parentElement.querySelectorAll('[data-pick]').forEach(x=>x.classList.toggle('chosen',x===b));document.getElementById('feedback-'+b.dataset.pick).textContent='เลือก '+b.dataset.a+' แล้ว';updateQuizStatus()}))}
+function updateQuizStatus(){const n=Object.keys(answers).length;document.getElementById('quizStatus').textContent=`ตอบแล้ว ${n}/3 ข้อ`;document.getElementById('toPart2').disabled=n!==3}
+function goPart(n){[1,2,3].forEach(i=>{document.getElementById('part'+i).classList.toggle('hidden',i!==n);document.getElementById('step'+i).classList.toggle('active',i===n)});if(n===2){renderControls('exploreControls');}if(n===3){chooseTarget(target);renderControls('challengeControls');window.scrollTo({top:0,behavior:'smooth'})}else window.scrollTo({top:0,behavior:'smooth'})}
+function chooseTarget(key){target=key;document.querySelectorAll('.target-btn').forEach(b=>b.classList.remove('active'));document.getElementById('t'+key[0].toUpperCase()+key.slice(1)).classList.add('active');document.getElementById('hintText').textContent=presets[key].hint;document.getElementById('scoreResult').classList.add('hidden')}
+function submitChallenge(){const p=presets[target];let diffs=[Math.abs(state.cutoff-p.cutoff)/(8000-200),Math.abs(state.pitch-p.pitch)/24,Math.abs(state.reverb-p.reverb)/0.8];let score=Math.round(100*(1-diffs.reduce((a,b)=>a+b,0)/diffs.length));score=Math.max(0,Math.min(100,score));document.getElementById('scoreNumber').textContent=score;document.getElementById('scoreTitle').textContent=score>=85?'ใกล้เคียงมาก!':score>=60?'มาถูกทางแล้ว':'ลองปรับอีกครั้ง';document.getElementById('scoreText').textContent=`คะแนนนี้เปรียบเทียบ Filter Cutoff, Pitch และ Reverb กับ Target ${p.name} (ระดับเสียงใช้ฟังประกอบ แต่ยังไม่รวมในการคำนวณคะแนน)`;document.getElementById('scoreResult').classList.remove('hidden')}
+buildQuiz();renderControls('exploreControls');renderControls('challengeControls');
+</script>
+</body>
+</html>
