@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<!-- Behind the Sound: GitHub Pages version with separate CSS and JavaScript files -->
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behind the Sound — One Sound, Many Feelings</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<header>
+  <div>
+    <div class="brand">✳ BEHIND THE SOUND</div>
+    <div style="font-size:11px;color:var(--muted)">
+      ONE SOUND, MANY FEELINGS
+    </div>
+  </div>
+  <div class="version">INTERACTIVE SOUND LAB</div>
+</header>
+
+<main>
+
+<!-- ===================================================
+     PAGE 1: HOME — หน้าแรก
+     ปุ่ม GO! จะพาไปหน้า Part 1
+     =================================================== -->
+<section class="screen home" id="homeScreen">
+  <div class="home-kicker">INTERACTIVE SOUND EXPERIMENT</div>
+
+  <h1>BEHIND<br>THE SOUND</h1>
+
+  <p class="tagline">1 เสียง · หลายความรู้สึก</p>
+
+  <p class="intro">
+    เสียงเดียวกัน สามารถเปลี่ยนความรู้สึกได้ด้วยการออกแบบเสียง<br>
+    ลองฟัง เรียนรู้ และทดลองปรับเสียงด้วยตัวเอง
+  </p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="num">01</div>
+      <strong>Sound Challenge</strong>
+      <span>ฟังและเลือกเสียง</span>
+    </div>
+
+    <div class="step">
+      <div class="num">02</div>
+      <strong>Learn & Explore</strong>
+      <span>เรียนรู้และทดลอง</span>
+    </div>
+
+    <div class="step">
+      <div class="num">03</div>
+      <strong>Design Challenge</strong>
+      <span>ออกแบบเสียงของคุณ</span>
+    </div>
+  </div>
+
+  <button class="primary go-button"
+          onclick="showScreen('part1Screen')">
+    GO ! <span aria-hidden="true">↗</span>
+  </button>
+
+  <div class="home-note">
+    HEADPHONES RECOMMENDED · TURN YOUR SOUND ON
+  </div>
+</section>
+
+
+<!-- ===================================================
+     PAGE 2: PART 1 — SOUND CHALLENGE
+     ฟัง Original แล้วเลือกเสียงที่เหมาะกับสถานการณ์
+     =================================================== -->
+<section class="screen panel hidden" id="part1Screen">
+  <div class="eyebrow">Part 1</div>
+  <h2>Sound Challenge</h2>
+  <p class="sub">
+    เริ่มจากเสียงเคาะประตู Original แล้วเลือกเวอร์ชันที่เหมาะกับแต่ละสถานการณ์
+  </p>
+
+  <div class="sound-card" style="margin-bottom:18px">
+    <div class="sound-left">
+      <div class="letter">O</div>
+      <div>
+        <h3>Original · Door Knock</h3>
+        <p>เสียงต้นฉบับจำลอง — ยังไม่ผ่านการปรับแต่ง</p>
+      </div>
+    </div>
+    <button onclick="playOneShot('original')">▶ ฟัง Original</button>
+  </div>
+
+  <!-- JavaScript จะสร้างคำถาม Quiz ใส่ในกล่องนี้ -->
+  <div id="quiz"></div>
+
+  <div class="row between" style="margin-top:16px">
+    <span id="quizStatus" class="sub" style="margin:0">
+      ตอบให้ครบทั้ง 3 ข้อเพื่อไปต่อ
+    </span>
+    <button class="primary"
+            id="toPart2"
+            onclick="showScreen('part2SelectScreen')"
+            disabled>
+      ไป Part 2 →
+    </button>
+  </div>
+</section>
+
+
+<!-- ===================================================
+     PAGE 3A: PART 2 — เลือก Target ก่อน
+     =================================================== -->
+<section class="screen panel hidden" id="part2SelectScreen">
+  <div class="eyebrow">Part 2</div>
+  <h2>Learn & Explore</h2>
+  <p class="sub">
+    เลือก Target ที่อยากเรียนรู้ก่อน เมื่อเลือกแล้วจะแสดงข้อมูล
+    และเครื่องมือของเสียงนั้นเต็มหน้า
+  </p>
+
+  <div class="cards">
+    <article class="choice">
+      <span class="pill">TARGET A</span>
+      <h3>Horror</h3>
+      <p>โทนต่ำ มืด และมีหางเสียงช่วยสร้างบรรยากาศลึกลับ</p>
+      <button onclick="openExplore('horror')">Explore A →</button>
+    </article>
+
+    <article class="choice">
+      <span class="pill">TARGET B</span>
+      <h3>Soft</h3>
+      <p>เสียงนุ่ม ลดความแหลมและลดความแรงของเสียง</p>
+      <button onclick="openExplore('soft')">Explore B →</button>
+    </article>
+
+    <article class="choice">
+      <span class="pill">TARGET C</span>
+      <h3>Impact</h3>
+      <p>เสียงหนักแน่น เน้นแรงปะทะและความชัดของการเคาะ</p>
+      <button onclick="openExplore('impact')">Explore C →</button>
+    </article>
+  </div>
+
+  <div class="section-actions">
+    <button onclick="showScreen('part1Screen')">← Back</button>
+    <span class="center" style="color:var(--muted);font-size:12px">
+      เลือกเสียงเพื่อเริ่มทดลอง
+    </span>
+    <span></span>
+  </div>
+</section>
+
+
+<!-- ===================================================
+     PAGE 3B: PART 2 — รายละเอียด Target ที่เลือก
+     =================================================== -->
+<section class="screen panel hidden" id="part2DetailScreen">
+  <div class="eyebrow">Part 2 · Learn & Explore</div>
+  <h2 id="exploreTitle">Horror</h2>
+  <p class="sub" id="exploreDesc">
+    ฟังตัวอย่าง แล้วลองปรับค่าด้วยตัวเอง
+  </p>
+
+  <div class="sound-card">
+    <div class="sound-left">
+      <div class="letter" id="exploreLetter">A</div>
+      <div>
+        <h3 id="exploreSampleTitle">Target A · Horror</h3>
+        <p>ทดลองได้อย่างอิสระ — ไม่มีคะแนนในส่วนนี้</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <button onclick="playExplore()">▶ Play / Update</button>
+      <button onclick="stopAudio()">■ Stop</button>
+    </div>
+  </div>
+
+  <!-- กราฟ Filter ของ Part 2 -->
+  <div class="daw" id="exploreDaw">
+    <div class="daw-top">
+      <div class="daw-title">FILTER · LOW-PASS</div>
+      <div class="live-label">● LIVE RESPONSE</div>
+    </div>
+
+    <svg id="exploreGraph"
+         class="filter-graph"
+         viewBox="0 0 720 245"
+         role="img"
+         aria-label="Filter frequency response graph">
+    </svg>
+
+    <div class="graph-note">
+      ลากจุดสีเขียวบนกราฟหรือใช้แถบ Cutoff เพื่อเปลี่ยนความถี่
+      · การเปลี่ยนกราฟจะแสดงผลทันที
+    </div>
+
+    <div class="daw-bottom">
+      <div style="color:var(--muted);font-size:12px">
+        Low-pass filter จะปล่อยย่านความถี่ต่ำผ่านได้มากกว่า
+        และค่อย ๆ ลดความถี่สูงลง
+      </div>
+
+      <div class="cutoff-control">
+        <label for="exploreCutoff">
+          <span>Cutoff</span>
+          <output id="exploreCutoffOut">8000 Hz</output>
+        </label>
+
+        <!-- ปุ่ม - และ + ลดหรือเพิ่ม Cutoff ทีละ 100 Hz -->
+        <div class="stepper">
+          <button type="button"
+                  aria-label="ลด Cutoff"
+                  onclick="nudgeCutoff('explore',-1)">−</button>
+
+          <input id="exploreCutoff"
+                 type="range"
+                 min="200"
+                 max="8000"
+                 step="10"
+                 value="8000">
+
+          <button type="button"
+                  aria-label="เพิ่ม Cutoff"
+                  onclick="nudgeCutoff('explore',1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript สร้างตัวควบคุม Pitch, Reverb และ Volume -->
+  <div class="controls" id="exploreControls"></div>
+
+  <div class="section-actions">
+    <button onclick="stopAudio();showScreen('part2SelectScreen')">
+      ← Back
+    </button>
+
+    <button class="center" onclick="resetExplore()">
+      ↺ Reset values
+    </button>
+
+    <button class="primary right"
+            onclick="stopAudio();startChallenge()">
+      Go to Part 3 →
+    </button>
+  </div>
+</section>
+
+
+<!-- ===================================================
+     PAGE 4: PART 3 — SOUND DESIGN CHALLENGE
+     ผู้เล่นเริ่มจาก Original ไม่ใช่ค่าของ Target
+     =================================================== -->
+<section class="screen panel hidden" id="part3Screen">
+  <div class="eyebrow">Part 3</div>
+  <h2>Sound Design Challenge</h2>
+  <p class="sub">
+    เริ่มจาก Original ที่ยังไม่ปรับ แล้วออกแบบเสียงให้ใกล้เคียงกับ Target ที่เลือก
+  </p>
+
+  <!-- เลือก Target ที่ต้องการทำ -->
+  <div class="row" style="margin-bottom:18px">
+    <button class="target-btn active"
+            id="tHorror"
+            onclick="chooseChallengeTarget('horror')">
+      A · Horror
+      <small>ลึกลับ / โทนต่ำ</small>
+    </button>
+
+    <button class="target-btn"
+            id="tSoft"
+            onclick="chooseChallengeTarget('soft')">
+      B · Soft
+      <small>นุ่ม / เบา</small>
+    </button>
+
+    <button class="target-btn"
+            id="tImpact"
+            onclick="chooseChallengeTarget('impact')">
+      C · Impact
+      <small>หนักแน่น / ชัด</small>
+    </button>
+  </div>
+
+  <div class="row between" style="margin-bottom:14px">
+    <div style="color:var(--muted);font-size:13px">
+      เปรียบเทียบเสียงต้นฉบับ เสียงเป้าหมาย และเสียงที่คุณกำลังออกแบบ
+    </div>
+
+    <div class="transport">
+      <button onclick="playOneShot('original')">▶ Original</button>
+      <button onclick="playOneShot(challengeTarget)">▶ Target</button>
+      <button onclick="playChallenge()">▶ Play / Update</button>
+      <button onclick="stopAudio()">■ Stop</button>
+    </div>
+  </div>
+
+  <!-- HINT: บอกช่วงค่าคร่าว ๆ ไม่เฉลยค่าที่แน่นอน -->
+  <div class="hint">
+    <strong>HINT</strong>
+    <div class="hint-lines" id="hintLines"></div>
+  </div>
+
+  <!-- กราฟ Filter ของ Part 3 ใช้ระบบเดียวกับ Part 2 -->
+  <div class="daw" id="challengeDaw">
+    <div class="daw-top">
+      <div class="daw-title">FILTER · LOW-PASS</div>
+      <div class="live-label">● LIVE RESPONSE</div>
+    </div>
+
+    <svg id="challengeGraph"
+         class="filter-graph"
+         viewBox="0 0 720 245"
+         role="img"
+         aria-label="Filter frequency response graph">
+    </svg>
+
+    <div class="graph-note">
+      ลากจุดสีเขียวบนกราฟหรือใช้แถบ Cutoff เพื่อปรับ Filter แบบเรียลไทม์
+    </div>
+
+    <div class="daw-bottom">
+      <div style="color:var(--muted);font-size:12px">
+        เริ่มต้นจากค่า Original ทุกครั้งที่เลือก Target ใหม่
+        ค่าเป้าหมายจะไม่ถูกใส่ให้โดยอัตโนมัติ
+      </div>
+
+      <div class="cutoff-control">
+        <label for="challengeCutoff">
+          <span>Cutoff</span>
+          <output id="challengeCutoffOut">8000 Hz</output>
+        </label>
+
+        <!-- ปุ่ม - และ + ลดหรือเพิ่ม Cutoff ทีละ 100 Hz -->
+        <div class="stepper">
+          <button type="button"
+                  aria-label="ลด Cutoff"
+                  onclick="nudgeCutoff('challenge',-1)">−</button>
+
+          <input id="challengeCutoff"
+                 type="range"
+                 min="200"
+                 max="8000"
+                 step="10"
+                 value="8000">
+
+          <button type="button"
+                  aria-label="เพิ่ม Cutoff"
+                  onclick="nudgeCutoff('challenge',1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript สร้างตัวควบคุม Pitch, Reverb และ Volume -->
+  <div class="controls" id="challengeControls"></div>
+
+  <div class="section-actions">
+    <button onclick="showScreen('part2DetailScreen')">← Back</button>
+
+    <button class="center" onclick="resetChallenge()">
+      ↺ Reset values
+    </button>
+
+    <button class="primary right" onclick="submitChallenge()">
+      Submit & View Score
+    </button>
+  </div>
+
+  <div class="notice">
+    คะแนนเดโม่คำนวณจากความใกล้เคียงของ Filter Cutoff, Pitch และ Reverb
+    กับเสียง Target ที่เลือก
+  </div>
+</section>
+
+
+<!-- ===================================================
+     SCORE POPUP — หน้าต่างคะแนนกลางจอพร้อมพื้นหลังเบลอ
+     =================================================== -->
+<div class="modal-backdrop hidden"
+     id="scoreModal"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="modalTitle"
+     onclick="if(event.target===this)closeScoreModal()">
+
+  <div class="modal">
+    <div class="modal-mark">CHALLENGE RESULT</div>
+
+    <h2 id="modalTitle" style="margin:8px 0 0">Your Score</h2>
+
+    <div class="modal-score">
+      <span id="scoreNumber">0</span>
+      <span style="font-size:30px">/100</span>
+    </div>
+
+    <h3 id="scoreTitle">Good work!</h3>
+    <p id="scoreText">ผลการทดลอง</p>
+
+    <div class="modal-actions">
+      <button onclick="closeScoreModal()">Keep editing</button>
+      <button class="primary"
+              onclick="resetChallenge();closeScoreModal()">
+        Try again
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  BEHIND THE SOUND · Demo prototype ·
+  เสียงเคาะประตูในเวอร์ชันนี้เป็นเสียงสังเคราะห์สำหรับทดลองระบบ
+</div>
+
+</main>
+
+<script src="script.js" defer></script>
+</body>
+</html>
